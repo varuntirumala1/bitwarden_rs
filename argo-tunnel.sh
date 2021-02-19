@@ -1,3 +1,3 @@
   
 #!/bin/bash
-cloudflared --origincert /data/cert.pem --config /data/cargo.yml tunnel run bitwarden
+cloudflared --origincert /data/cert.pem --config /data/argo.yml tunnel run bitwarden
