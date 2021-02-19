@@ -108,10 +108,9 @@ COPY --from=build /app/target/release/bitwarden_rs .
 
 COPY docker/healthcheck.sh /healthcheck.sh
 COPY docker/start.sh /start.sh
-
+COPY supervisord.conf /etc/supervisord.conf
 HEALTHCHECK --interval=60s --timeout=10s CMD ["/healthcheck.sh"]
 
 # Configures the startup!
-WORKDIR /
-ENTRYPOINT ["/usr/bin/dumb-init", "--"]
-CMD ["/start.sh"]
+#WORKDIR /
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
