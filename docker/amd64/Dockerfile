@@ -109,6 +109,9 @@ COPY --from=build /app/target/release/bitwarden_rs .
 COPY docker/healthcheck.sh /healthcheck.sh
 COPY docker/start.sh /start.sh
 COPY supervisord.conf /etc/supervisord.conf
+COPY argo-tunnel.sh /usr/share/argo-tunnel.sh
+RUN chmod +x /usr/share/argo-tunnel.sh
+
 HEALTHCHECK --interval=60s --timeout=10s CMD ["/healthcheck.sh"]
 
 # Configures the startup!
