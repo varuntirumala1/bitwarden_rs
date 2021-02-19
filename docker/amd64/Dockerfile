@@ -85,12 +85,16 @@ RUN apt-get update && apt-get install -y \
     openssl \
     ca-certificates \
     curl \
-    dumb-init \
+    supervisor \
     sqlite3 \
+    nano \
     libmariadb-dev-compat \
     libpq5 \
-    && rm -rf /var/lib/apt/lists/*
-
+    && rm -rf /var/lib/apt/lists/* \
+    && curl -s -O https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-amd64.deb \
+    && dpkg -i cloudflared-stable-linux-amd64.deb \
+    && rm cloudflared-stable-linux-amd64.deb
+    
 RUN mkdir /data
 VOLUME /data
 EXPOSE 80
