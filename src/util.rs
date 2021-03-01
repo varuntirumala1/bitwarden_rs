@@ -23,7 +23,7 @@ impl Fairing for AppHeaders {
     }
 
     fn on_response(&self, _req: &Request, res: &mut Response) {
-        res.set_raw_header("Feature-Policy", "accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; camera 'none'; encrypted-media 'none'; fullscreen 'none'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; payment 'none'; picture-in-picture 'none'; sync-xhr 'self' https://haveibeenpwned.com https://twofactorauth.org; usb 'none'; vr 'none'");
+        res.set_raw_header("Feature-Policy", "accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; camera 'none'; encrypted-media 'none'; fullscreen 'none'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; payment 'none'; picture-in-picture 'none'; sync-xhr 'self' https://haveibeenpwned.com https://2fa.directory; usb 'none'; vr 'none'");
         res.set_raw_header("Referrer-Policy", "same-origin");
         res.set_raw_header("X-Frame-Options", "SAMEORIGIN");
         res.set_raw_header("X-Content-Type-Options", "nosniff");
@@ -356,6 +356,15 @@ pub fn format_datetime_local(dt: &DateTime<Local>, fmt: &str) -> String {
 /// and then calls [format_datetime_local](crate::util::format_datetime_local).
 pub fn format_naive_datetime_local(dt: &NaiveDateTime, fmt: &str) -> String {
     format_datetime_local(&Local.from_utc_datetime(dt), fmt)
+}
+
+//
+// Deployment environment methods
+//
+
+/// Returns true if the program is running in Docker or Podman.
+pub fn is_running_in_docker() -> bool {
+    Path::new("/.dockerenv").exists() || Path::new("/run/.containerenv").exists()
 }
 
 //
