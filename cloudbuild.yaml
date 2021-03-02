@@ -1,5 +1,5 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker' 
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/$TAG_NAME', '.']
-images: ['gcr.io/$PROJECT_ID/$TAG_NAME']
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/bitwardenrs', '.']
+images: ['gcr.io/$PROJECT_ID/bitwardenrs']
 timeout: '1800s'
